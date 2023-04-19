@@ -2,40 +2,82 @@
 {
     internal class Program
     {
+        public class Livro
+        {
+            //construtor da classe já recebendo 2 parametros
+            public Livro(string Receita, string Categoria)
+            {
+                this.Receita = Receita;
+                this.Categoria = Categoria;
+            }
+
+            //aqui são propriedades da classe
+
+            public string Receita { get; set; }
+            public string Categoria { get; set; }
+        }
+
+
+
+
         static void Main(string[] args)
         {
-            //fazer uma lista que aceita uma string e um inteiro chamada receitas
-
-            var receitas = new List<(string, int)>();
-
-            //1 - bolo
-            receitas.Add(("Bolo de Cenoura", 1));
-            receitas.Add(("Bolo de Chocolate", 1));
-            receitas.Add(("Bolo de Laranja", 1));
-
-            //2 - torta salgada
-            receitas.Add(("Torta salgada de uva passas! :S", 2));
-            receitas.Add(("Torta salgada de pesto!", 2));
-            receitas.Add(("Torta salgada de queijo!", 2));
+            //não tinha pq ser uma variavel fora da main e static, trouxe pra cá.
+            var receitasBolo = new List<Livro>();
 
 
-            //3 - torta doce
-            receitas.Add(("Torta holandesa", 3));
-            receitas.Add(("Torta de maçã", 3));
-            receitas.Add(("Torta de limão", 3));
-
-
-            Console.WriteLine("Qual tipo de receita vc quer? [1 bolo, 2-torta salgada, 3- torta doce");
-            int resposta = Int32.Parse(Console.ReadLine());
-
-            //aqui estou usando o linq para filtrar a lista, que é algo mais avançado
-            // .WHERE é um filtro
-            // .Where(x => x.????  sempre tem esse formato n => n.?????, troque os pontos de interrogação pelo campo que vc quer filtrar
-            foreach (var receita in receitas.Where(w => w.Item2 == resposta))
+            Console.WriteLine("Receita de bolo? [para sim digite 1]");
+            int digite = Int32.Parse(Console.ReadLine());
+            if (digite == 1)
             {
-                //foreach percorre uma lista
-                Console.WriteLine(receita.Item1);
+                receitasBolo.Add(new Livro("brigadeiro", "bolo"));
+                receitasBolo.Add(new Livro("morango", "bolo"));
+                receitasBolo.Add(new Livro("Laranja", "bolo"));
+                receitasBolo.Add(new Livro("Cenoura", "bolo"));
+
+                //coloquei as chaves
+                foreach (Livro l in receitasBolo)
+                {
+                    Console.WriteLine(l.Categoria + " de " + l.Receita);
+                }
             }
+            else
+            {
+                Console.WriteLine("Vamos para a próxima categoria!");
+            }
+            //removi umas chaves perdidas
+
+
+            Console.WriteLine("\n");
+
+
+            List<Livro> receitasTorta = new List<Livro>();
+            Console.WriteLine("Receita de Torta? [para sim digite 1]");
+            int escreva = Int32.Parse(Console.ReadLine());
+            if (escreva == 1)
+            {
+                receitasTorta.Add(new Livro("frango", "Torta"));
+                receitasTorta.Add(new Livro("carne", "Torta"));
+                receitasTorta.Add(new Livro("morango", "Torta"));
+                receitasTorta.Add(new Livro("banana", "Torta"));
+                receitasTorta.Add(new Livro("batata", "Torta"));
+                receitasTorta.Add(new Livro("doce", "Torta"));
+
+                foreach (Livro t in receitasTorta)
+                {
+                    Console.WriteLine(t.Categoria + " de " + t.Receita);
+                }
+            }
+            else
+            {
+                Console.WriteLine("sem mais receitas");
+            }
+
+
         }
     }
 }
+
+
+
+
