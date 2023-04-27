@@ -77,9 +77,30 @@ Console.WriteLine("==========================================");
 
 
 //Operador ternário
-
 var ternario = true;
-var logico4 = ternario ? valor1 : valor2;
+
+
+int logico4;
+if (ternario)
+{
+    logico4 = valor1;
+}
+else
+{
+    logico4 = valor2;
+}
+
+
+//refatorando
+int logico4b = valor2;
+if (ternario)
+{
+    logico4b = valor1;
+}
+
+
+//refatorando
+var logico5 = ternario ? valor1 : valor2;
 
 
 
