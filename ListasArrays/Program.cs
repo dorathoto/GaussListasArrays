@@ -55,4 +55,19 @@ foreach (var aluno in alunasList.OrderByDescending(o => o.idade))
 
 
 
+//Exemplo de unboxing em C#
+
+//BOXING é a conversão de um valor de um tipo de valor para um objeto do tipo object
+object a = valor1;
+
+
+//UNBOXING é a conversão de um objeto do tipo object para um tipo de valor
+//conversão explícita
+int b = (int)a;
+
+
+//conversão implicita
+long c = valor1;
+
+
 Console.ReadKey();
