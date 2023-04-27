@@ -3,12 +3,10 @@ nomes.Add("Barbara");
 nomes.Add("Maria");
 nomes.Add("Ana");
 
-
 var alunasList = new List<(string nome, int idade)>();
 alunasList.Add(("Barbara", 16));
 alunasList.Add(("Maria", 20));
 alunasList.Add(("Ana", 19));
-
 
 var alunoList2 = new List<(string nome, int idade)>
 {
@@ -21,12 +19,9 @@ var alunoList2 = new List<(string nome, int idade)>
 //Orderby, OrderbyDesc, Find, lambda
 
 var alunoNull = alunasList.Find(x => x.nome == "Leonardo");
-
 var alunoAchou = alunasList.Find(x => x.nome == "João");
 var idadeAlunoAchou = alunoAchou.idade;
-
 var existe = alunasList.Any(w => w.idade == 18);
-
 
 //.WHERE ToList(), First()
 var t = alunasList.Where(w => w.idade != 20 && w.nome.Contains("a")).ToList();
@@ -54,10 +49,10 @@ foreach (var aluno in alunasList.OrderByDescending(o => o.idade))
 }
 
 
-
 //Exemplo de unboxing em C#
 
 //BOXING é a conversão de um valor de um tipo de valor para um objeto do tipo object
+var valor1 = 10;
 object a = valor1;
 
 
