@@ -1,85 +1,57 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-int valor1 = 10;
-int valor2 = 3;
-
-//Operadores aritméticos
-int atribuicao = valor1 + valor2;
-int subtracao = valor1 - valor2;
-int multiplicacao = valor1 * valor2;
-int divisao = valor1 / valor2;
-int resto = valor1 % valor2;
-
-Console.WriteLine($"Atribuição de valor1 + valor2 =  {atribuicao}");
-Console.WriteLine($"Subtração de valor1 - valor2 =  {subtracao}");
-Console.WriteLine($"Multiplicação de valor1 * valor2 =  {multiplicacao}");
-Console.WriteLine($"Divisão de valor1 / valor2 =  {divisao}");
-Console.WriteLine($"Resto de valor1 % valor2 =  {resto}");
+﻿var nomes = new List<string>();
+nomes.Add("Barbara");
+nomes.Add("Maria");
+nomes.Add("Ana");
 
 
-Console.WriteLine("==========================================");
-///Operadores de Atribuição reduzida +=, -=, *=, /=, %=
-int valor3 = valor1;
-int valor4 = valor2;
-
-int atribuicao2 = valor3 += valor4;
-int subtracao2 = valor3 -= valor4;
-int multiplicacao2 = valor3 *= valor4;
-int divisao2 = valor3 /= valor4;
-int resto2 = valor3 %= valor4;
+var alunasList = new List<(string nome, int idade)>();
+alunasList.Add(("Barbara", 16));
+alunasList.Add(("Maria", 20));
+alunasList.Add(("Ana", 19));
 
 
-Console.WriteLine($"Atribuição de valor3 += valor4 =  {atribuicao2}");
-Console.WriteLine($"Subtração de valor3 -= valor4 =  {subtracao2}");
-Console.WriteLine($"Multiplicação de valor3 *= valor4 =  {multiplicacao2}");
-Console.WriteLine($"Divisão de valor3 /= valor4 =  {divisao2}");
-Console.WriteLine($"Resto de valor3 %= valor4 =  {resto2}");
+var alunoList2 = new List<(string nome, int idade)>
+{
+    ("Barbara", 16),
+    ("Maria", 20),
+    ("Ana", 19)
+};
 
-Console.WriteLine("==========================================");
-///Operadores de Incremento e Decremento e pré-incremento, pré-decremento
-int valor5 = valor1++;
-int valor6 = valor1--;
-int valor7 = ++valor1;
-int valor8 = --valor1;
-Console.WriteLine($" valor1++ =  {valor5}");
-Console.WriteLine($" valor1-- =  {valor6}");
-Console.WriteLine($" ++valor1 =  {valor7}");
-Console.WriteLine($" --valor1 =  {valor8}");
+//LINQ
+//Orderby, OrderbyDesc, Find, lambda
 
-Console.WriteLine("==========================================");
-///Operadores de Comparação ==, !=, >, <, >=, <=
-bool comparacao1 = valor1 == valor2;
-bool comparacao2 = valor1 != valor2;
-bool comparacao3 = valor1 > valor2;
-bool comparacao4 = valor1 < valor2;
-bool comparacao5 = valor1 >= valor2;
-bool comparacao6 = valor1 <= valor2;
-Console.WriteLine($"valor1 == valor2 =  {comparacao1}");
-Console.WriteLine($"valor1 != valor2 =  {comparacao2}");
-Console.WriteLine($"valor1 > valor2 =  {comparacao3}");
-Console.WriteLine($"valor1 < valor2 =  {comparacao4}");
-Console.WriteLine($"valor1 >= valor2 =  {comparacao5}");
-Console.WriteLine($"valor1 <= valor2 =  {comparacao6}");
+var alunoNull = alunasList.Find(x => x.nome == "Leonardo");
+
+var alunoAchou = alunasList.Find(x => x.nome == "João");
+var idadeAlunoAchou = alunoAchou.idade;
+
+var existe = alunasList.Any(w => w.idade == 18);
 
 
-Console.WriteLine("==========================================");
-//Operadores Lógicos &&, ||, !
+//.WHERE ToList(), First()
+var t = alunasList.Where(w => w.idade != 20 && w.nome.Contains("a")).ToList();
 
-bool logico1 = valor1 == valor2 && valor1 > valor2;
-bool logico2 = valor1 == valor2 || valor1 > valor2;
-bool logico3 = !(valor1 == valor2);
-Console.WriteLine($"valor1 == valor2 && valor1 > valor2 =  {logico1}");
-Console.WriteLine($"valor1 == valor2 || valor1 > valor2 =  {logico2}");
-Console.WriteLine($"!(valor1 == valor2) =  {logico3}");
+//SUM - somar
+var totalIdade = alunasList.Sum(w => w.idade);
 
+//WHERE + SUM
+var totalIdade2 = alunasList.Where(w => w.idade > 18).Sum(w => w.idade);
 
-Console.WriteLine("==========================================");
+//Somente um campo
+var listString = alunasList.Select(p => p.nome).ToList();
 
+foreach (var aluno in alunasList.OrderBy(o => o.nome))
+{
+    Console.WriteLine(aluno.nome);
 
-//Operador ternário
+}
 
-var ternario = true;
-var logico4 = ternario ? valor1 : valor2;
+//escopo de variavel aluno já existe mas pertence somente ao foreach
+foreach (var aluno in alunasList.OrderByDescending(o => o.idade))
+{
+    Console.WriteLine($"Idade {aluno.idade}");
+
+}
 
 
 
