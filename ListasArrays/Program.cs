@@ -1,85 +1,67 @@
-﻿using leoonardo = System.Int32;
-//exemplo de var
+﻿//Ex: fazendo um for com 1mil e adicionando uma list<Cadastro> com valores aleatorios (random)
+using Exemplos.Models;
+using Exemplos.Models.Enums;
 
-using Exemplos;
-using System.Runtime.Serialization;
+var lista = new List<Cadastro>();   
 
-var valor1 = 10;
-var valor2 = 20m;
-var valor3 = 30.0;
-var valor4 = 40.0f;
-
-//variaves menos comuns
-var valor5 = 50L;
-var valor6 = 60u;
-var valor7 = 70ul;
-var valor8 = 80uL;
-
-
-//++++++++++++++++++++++++++++++++++++++++++++
-bool valor9 = true;
-
-if(valor9 == true)
+Random rnd = new Random();
+for (int i = 0; i < 4; i++)
 {
-    ///Codigo muito feio
-}
+    var num = rnd.Next(0, 10);
+    var salario = num * 1000.35m;
+    var cadastro = new Cadastro();
+    cadastro.Nome = $"Nome {i}";
+    cadastro.Salario = salario ==0 ? 1000 : salario;
+    cadastro.Funcao = (TipoFuncao)num;
+    lista.Add(cadastro);
 
-if(valor9 == false)
+    Console.WriteLine($"[{i}] - Nome: {cadastro.Nome} - Salario: {cadastro.Salario} - Funcao: {cadastro.Funcao}");
+
+}
+Console.WriteLine("#####################################");
+Console.WriteLine("######       STATS          #########");
+Console.WriteLine($"Total de registros: {lista.Count()}");
+Console.WriteLine($"Total de registros com salario maior que 1000: {lista.Where(x => x.Salario > 1000).Count()}");
+Console.WriteLine($"Total de registros com salario menor que 1000: {lista.Where(x => x.Salario < 1000).Count()}");
+Console.WriteLine($"Total de registros com salario igual a 1000: {lista.Where(x => x.Salario == 1000).Count()}");
+//refatorar
+Console.WriteLine($"Total de registros com funcao igual a 1: {lista.Where(x => x.Funcao == TipoFuncao.TI).Count()}");
+Console.WriteLine($"Total de registros com funcao igual a 2: {lista.Where(x => x.Funcao == TipoFuncao.RH).Count()}");
+Console.WriteLine($"Total de registros com funcao igual a 3: {lista.Where(x => x.Funcao == TipoFuncao.CLevel).Count()}");
+Console.WriteLine($"Total de registros com funcao igual a 4: {lista.Where(x => x.Funcao == TipoFuncao.Financeiro).Count()}");
+Console.WriteLine($"Total de registros com funcao igual a 5: {lista.Where(x => x.Funcao == TipoFuncao.Administrativo).Count()}");
+
+foreach (var item in Enum.GetValues(typeof(TipoFuncao)))
 {
-    //codigo muito feio
+    Console.WriteLine($"Total de registros com funcao igual a {(int)item}: {lista.Where(x => x.Funcao == (TipoFuncao)item).Count()}");
 }
+Console.WriteLine($"Média de salarios: {lista.Average(x => x.Salario)}");
 
-if(valor9 != true)
+Console.WriteLine("#####################################");
+
+
+
+//ex:2
+//fazer um do while para pedir o nome e o salario de 10 pessoas e mostrar a media de salario
+//e mostrar o nome da pessoa com o maior salario
+var lista2 = new List<Cadastro>();
+bool continuarLoop = true;
+do
 {
-    //codigo feio
-}
+    var cadastro = new Cadastro();
+    Console.WriteLine("Digite o nome da pessoa:");
+    cadastro.Nome = Console.ReadLine();
+    Console.WriteLine("Digite o salario da pessoa:");
+    cadastro.Salario = Convert.ToDecimal(Console.ReadLine());
+    lista2.Add(cadastro);
+    Console.WriteLine("Deseja cadastrar mais pessoas? (S/N)");
+    var resposta = Console.ReadLine();
+    if (resposta.ToUpper() == "N")
+    {
+        continuarLoop = false;
+    }
 
-if (valor9)
-{
-    //Código Bonitinho :)
-}
+} while (continuarLoop);
 
-if (!valor9)
-{
-    //Código Bonitinho :)
-}
-
-//Lembrar operador ternário
-//+++++++++++++++++++++++++++++++++++++++++++++
-//verificar string e null
-string nome = null;
-if (string.IsNullOrEmpty(nome))
-{
-    //Código Bonitinho :)
-}
-
-
-
-///*****************************************************************
-///funções e classes
-var soma = Calculadora.Soma(10, 20);
-
-
-var soma2 = Soma(10, 20);
-
-int Soma(int a, int b)
-{
-    return a + b;
-}
-
-
-///*****************************************************************
-///Explicar a função main(String[] //array
-
-
-//Tipos nulllable
-
-int? variavel = null; //não valido var? variavel2 = 10;
-variavel = 12;
-
-leoonardo tipoEstranho = 10;//uso do using para alias;
-
-//ambos permitido mas mais feio que bater na mãe
-int @int = 20;
-int nomçãoéIncrivel = 10; 
-Console.ReadKey();
+Console.WriteLine($"A pessoa com maior salario é: {lista2.OrderByDescending(x => x.Salario).First().Nome}");
+Console.ReadLine();
