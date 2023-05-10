@@ -39,6 +39,15 @@ Console.WriteLine($"Média de salarios: {lista.Average(x => x.Salario)}");
 
 Console.WriteLine("#####################################");
 
+//como fazer média sem ser com linq
+var soma = 0m;
+var contador = 0;
+foreach (var item in lista)
+{
+    contador++;
+    soma += item.Salario;
+}
+var media = soma / lista.Count(); //contador
 
 
 //ex:2
